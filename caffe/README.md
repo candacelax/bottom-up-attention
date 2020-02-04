@@ -1,5 +1,25 @@
 # Caffe
 
+## Docker
+Install cudnn (see [instructions](https://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html#download)).
+Change Python version in CMakeLists.txt, line 34
+Set your CUDA version in Dockerfile, find list of tags [here](https://gitlab.com/nvidia/container-images/cuda/blob/master/doc/supported-tags.md). Be sure it's the "devel" version.
+Install nvidia-container-runtime, (see [instructions](https://github.com/NVIDIA/nvidia-container-runtime)).
+
+# TODO changes in cmake/Cuda.cmake, CMakeLists.txt
+``` bash    
+    sudo docker build -f caffe/docker/standalone/gpu/Dockerfile -t caffe_image_features .
+    sudo docker container run -t -v /storage/ccross/bias-grounded-bert/vilbert_beta/bottom-up-attention/caffe/features/conceptual:/opt/features/conceptual --gpus all caffe_image_features python2.7 /opt/tools/generate_tsv.py --cfg /opt/experiments/cfgs/faster_rcnn_end2end_resnet.yml --def /opt/models/vg/ResNet-101/faster_rcnn_end2end_final/test.prototxt --out /opt/features/conceptual/conceptual_resnet101_faster_rcnn_genome.tsv --net /opt/data/faster_rcnn_models/resnet101_faster_rcnn_final.caffemodel --total_group 1 --group_id 0 --split conceptual_image_val --data_dir /opt/data/conceptual-captions --gpu 0,1,2,3,4,5,6,7
+
+    sudo docker container run -t -v /storage/ccross/bias-grounded-bert/vilbert_beta/bottom-up-attention/caffe/features/google-images:/opt/features/google-images --gpus all caffe_image_features python2.7 /opt/tools/generate_tsv.py --cfg /opt/experiments/cfgs/faster_rcnn_end2end_resnet.yml --def /opt/models/vg/ResNet-101/faster_rcnn_end2end_final/test.prototxt --out /opt/features/google-images/weat3_resnet101_faster_rcnn_genome.tsv --net /opt/data/faster_rcnn_models/resnet101_faster_rcnn_final.caffemodel --total_group 1 --group_id 0 --split google_images --data_dir /opt/data/google-images/weat3 --gpu 0,1,2,3,4,5,6,7
+
+
+    sudo docker create -ti --name dummy caffe_image_features bash
+    sudo docker cp dummy:/opt/features/conceptual/conceptual_resnet101_faster_rcnn_genome.tsv.0 check_features.tsv
+    sudo docker rm -f dummy
+```
+
+
 [![Build Status](https://travis-ci.org/BVLC/caffe.svg?branch=master)](https://travis-ci.org/BVLC/caffe)
 [![License](https://img.shields.io/badge/license-BSD-blue.svg)](LICENSE)
 
