@@ -1,5 +1,8 @@
 # bottom-up-attention
 
+This is a forked version of the original repo that's updated to work with CUDA 10, CuDNN 7 in Docker. If you need to use this older version of Caffe, follow my Docker file in caffe/docker/standalone/gpu. Feel free to reach out with questions!
+
+
 This code implements a bottom-up attention model, based on multi-gpu training of Faster R-CNN with ResNet-101, using object and attribute annotations from [Visual Genome](http://visualgenome.org/).
 
 The pretrained model generates output features corresponding to salient image regions. These bottom-up attention features can typically be used as a drop-in replacement for CNN features in attention-based image captioning and visual question answering (VQA) models. This approach was used to achieve state-of-the-art image captioning performance on [MSCOCO](https://competitions.codalab.org/competitions/3221#results) (**CIDEr 117.9**, **BLEU_4 36.9**) and to win the [2017 VQA Challenge](http://www.visualqa.org/workshop.html) (**70.3%** overall accuracy), as described in:
