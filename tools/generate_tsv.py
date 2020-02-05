@@ -7,19 +7,19 @@
 
 
 # Example:
-# ./tools/generate_tsv.py --gpu 0,1,2,3,4,5,6,7 --cfg experiments/cfgs/faster_rcnn_end2end_resnet.yml --def models/vg/ResNet-101/faster_rcnn_end2end_final/test.prototxt --out test2014_resnet101_faster_rcnn_genome.tsv --net data/faster_rcnn_models/resnet101_faster_rcnn_final.caffemodel --split coco_test2014
+# ./tools/generate_tsv.py --gpu 0,1,2,3,4,5,6,7 --cfg experiments/cfgs/faster_rcnn_end2end_resnet.yml --def models/vg/ResNet-101/faster_rcnn_end2end_final/test.prototxt --out test2014_resnet101_faster_rcnn_genome.tsv --net models/faster_rcnn_models/resnet101_faster_rcnn_final.caffemodel --split coco_test2014
 
-# ./tools/generate_tsv.py --gpu 0 --cfg experiments/cfgs/faster_rcnn_end2end_resnet.yml --def models/vg/ResNet-101/faster_rcnn_end2end_final/test.prototxt --out /coc/scratch/panderson43/tsv/nocaps/nocaps_val_resnet101_faster_rcnn_genome.tsv --net data/faster_rcnn_models/resnet101_faster_rcnn_final.caffemodel --split nocaps_val
+# ./tools/generate_tsv.py --gpu 0 --cfg experiments/cfgs/faster_rcnn_end2end_resnet.yml --def models/vg/ResNet-101/faster_rcnn_end2end_final/test.prototxt --out /coc/scratch/panderson43/tsv/nocaps/nocaps_val_resnet101_faster_rcnn_genome.tsv --net models/faster_rcnn_models/resnet101_faster_rcnn_final.caffemodel --split nocaps_val
 
-# ./tools/generate_tsv.py --gpu 0 --cfg experiments/cfgs/faster_rcnn_end2end_resnet.yml --def models/vg/ResNet-101/faster_rcnn_end2end_final/test.prototxt --out /coc/scratch/panderson43/tsv/nocaps_36/nocaps_val_resnet101_faster_rcnn_genome.tsv --net data/faster_rcnn_models/resnet101_faster_rcnn_final.caffemodel --split nocaps_val
+# ./tools/generate_tsv.py --gpu 0 --cfg experiments/cfgs/faster_rcnn_end2end_resnet.yml --def models/vg/ResNet-101/faster_rcnn_end2end_final/test.prototxt --out /coc/scratch/panderson43/tsv/nocaps_36/nocaps_val_resnet101_faster_rcnn_genome.tsv --net models/faster_rcnn_models/resnet101_faster_rcnn_final.caffemodel --split nocaps_val
 
-#./tools/generate_tsv.py --gpu 0,1 --cfg experiments/cfgs/faster_rcnn_end2end_resnet.yml --def models/vg/ResNet-101/faster_rcnn_end2end_final/test.prototxt --out /coc/scratch/panderson43/tsv/nocaps_36/nocaps_test_resnet101_faster_rcnn_genome_36.tsv --net data/faster_rcnn_models/resnet101_faster_rcnn_final.caffemodel --split nocaps_test
+#./tools/generate_tsv.py --gpu 0,1 --cfg experiments/cfgs/faster_rcnn_end2end_resnet.yml --def models/vg/ResNet-101/faster_rcnn_end2end_final/test.prototxt --out /coc/scratch/panderson43/tsv/nocaps_36/nocaps_test_resnet101_faster_rcnn_genome_36.tsv --net models/faster_rcnn_models/resnet101_faster_rcnn_final.caffemodel --split nocaps_test
 
-#./tools/generate_tsv.py --gpu 0 --cfg experiments/cfgs/faster_rcnn_end2end_resnet.yml --def models/vg/ResNet-101/faster_rcnn_end2end_final/test.prototxt --out /coc/scratch/panderson43/tsv/test2014/test2014_resnet101_faster_rcnn_genome.tsv.3 --net data/faster_rcnn_models/resnet101_faster_rcnn_final.caffemodel --split coco_test2014
+#./tools/generate_tsv.py --gpu 0 --cfg experiments/cfgs/faster_rcnn_end2end_resnet.yml --def models/vg/ResNet-101/faster_rcnn_end2end_final/test.prototxt --out /coc/scratch/panderson43/tsv/test2014/test2014_resnet101_faster_rcnn_genome.tsv.3 --net models/faster_rcnn_models/resnet101_faster_rcnn_final.caffemodel --split coco_test2014
 
-#./tools/generate_tsv.py --gpu 0 --cfg experiments/cfgs/faster_rcnn_end2end_resnet.yml --def models/vg/ResNet-101/faster_rcnn_end2end_final/test.prototxt --out /coc/scratch/panderson43/tsv/nocaps/nocaps_test_resnet101_faster_rcnn_genome.tsv.4 --net data/faster_rcnn_models/resnet101_faster_rcnn_final.caffemodel --split nocaps_test
+#./tools/generate_tsv.py --gpu 0 --cfg experiments/cfgs/faster_rcnn_end2end_resnet.yml --def models/vg/ResNet-101/faster_rcnn_end2end_final/test.prototxt --out /coc/scratch/panderson43/tsv/nocaps/nocaps_test_resnet101_faster_rcnn_genome.tsv.4 --net models/faster_rcnn_models/resnet101_faster_rcnn_final.caffemodel --split nocaps_test
 
-#./tools/generate_tsv.py --gpu 0,1,2,3 --cfg experiments/cfgs/faster_rcnn_end2end_resnet.yml --def models/vg/ResNet-101/faster_rcnn_end2end_final/test.prototxt --out /coc/scratch/panderson43/tsv/openimages/openimages_trainsubset_resnet101_faster_rcnn_genome.tsv --net data/faster_rcnn_models/resnet101_faster_rcnn_final.caffemodel --split openimages_missing
+#./tools/generate_tsv.py --gpu 0,1,2,3 --cfg experiments/cfgs/faster_rcnn_end2end_resnet.yml --def models/vg/ResNet-101/faster_rcnn_end2end_final/test.prototxt --out /coc/scratch/panderson43/tsv/openimages/openimages_trainsubset_resnet101_faster_rcnn_genome.tsv --net models/faster_rcnn_models/resnet101_faster_rcnn_final.caffemodel --split openimages_missing
 
 import _init_paths
 from fast_rcnn.config import cfg, cfg_from_file
@@ -408,7 +408,7 @@ def generate_tsv(gpu_id, prototxt, weights, image_ids, outfile):
         with open(outfile) as tsvfile:
             reader = csv.DictReader(tsvfile, delimiter='\t', fieldnames = FIELDNAMES)
             for item in reader:
-                found_ids.add(int(item['image_id']))
+                found_ids.add(item['image_id'])
     
     missing = wanted_ids - found_ids
     if len(missing) == 0:
