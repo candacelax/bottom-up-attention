@@ -219,8 +219,10 @@ def load_image_ids(split_name, group_id, total_group, data_dir, image_ids=None):
         split.append((filepath, image_id))
     elif split_name == "google_images":
         for sub_dir in os.listdir(data_dir):
+            if not path.isdir(path.join(data_dir, sub_dir)):
+                continue
             for image_id in os.listdir(path.join(data_dir, sub_dir)):
-                if re.match('.*\.txt', image_id):
+                if not re.match('.*png|.*jpg', image_id):
                     continue
                 filepath = path.join(data_dir, sub_dir, image_id)
                 split.append((filepath, image_id))
